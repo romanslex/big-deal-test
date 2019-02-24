@@ -1,8 +1,8 @@
 <template lang="pug">
     .container
-        #planet-list
-            .planet-list-item(v-for="planet in planets" :key="planet.url")
-                | {{planet.name}} - {{planet.url}}
+        ul#planet-list
+            li.planet-list-item(v-for="planet in planets" :key="planet.url")
+                | {{planet.name}}
 </template>
 
 <script>
@@ -26,6 +26,11 @@
 
 <style scoped lang="stylus">
     .container
-        width 1000px
+        width 400px
         margin 0 auto
+
+    ul#planet-list
+        list-style none
+        li
+            cursor pointer
 </style>
