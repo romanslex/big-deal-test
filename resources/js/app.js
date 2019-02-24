@@ -14,13 +14,13 @@ import Vue from 'vue'
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".
  *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ * Eg. ./components/Main.vue -> <example-component></example-component>
  */
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-import ExampleComponent from "./components/ExampleComponent.vue";
+import Main from "./components/Main.vue";
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,7 +30,7 @@ import ExampleComponent from "./components/ExampleComponent.vue";
 
 const app = new Vue({
     components: {
-        ExampleComponent,
+        Main,
     },
-    render: h => h(ExampleComponent)
+    render: h => h(Main)
 }).$mount("#app");
