@@ -10,7 +10,10 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            axios
+                .get('/data/planets')
+                .then(response => console.log(response))
+                .catch(error => console.log(error));
         }
     }
 </script>
