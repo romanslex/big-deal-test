@@ -4,20 +4,17 @@ namespace Infrastructure;
 
 use Domain\Planet;
 use Domain\PlanetRepositoryInterface;
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as GuzzleClient;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class SwapiPlanetRepository implements PlanetRepositoryInterface
 {
-    /** @var Client */
+    /** @var GuzzleClient */
     private $client;
 
-    public function __construct()
+    public function __construct(GuzzleClient $client)
     {
-        $this->client = new Client([
-            'base_uri' => 'http://swapi.co/api/',
-            'timeout'  => 2.0,
-        ]);
+        $this->client = $client;
     }
 
     public function get($page): LengthAwarePaginator
