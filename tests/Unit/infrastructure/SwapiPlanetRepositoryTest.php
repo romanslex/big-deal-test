@@ -4,6 +4,7 @@ namespace Tests\Unit\infrastructure;
 
 use Domain\Planet;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
@@ -39,5 +40,22 @@ class SwapiPlanetRepositoryTest extends TestCase
 
         // assert
         self::assertEquals($expected, $result);
+    }
+
+    /** @test */
+    public function get_404()
+    {
+        $this->expectException(RequestException::class);
+
+        // arrange
+        $mock = new MockHandler([
+            new Response(404),
+        ]);
+        $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);
+        $service = new SwapiPlanetRepository($client);
+
+        // act
+        $service->get(1);
     }
 }
