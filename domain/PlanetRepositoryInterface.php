@@ -2,7 +2,9 @@
 
 namespace Domain;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+
 interface PlanetRepositoryInterface
 {
-    public function get($page);
+    public function get($page) : LengthAwarePaginator;
 }
