@@ -12,3 +12,5 @@
 */
 
 Route::get('/', 'SpaController@index');
+
+Route::get('/data/planets', 'PlanetController@index');
