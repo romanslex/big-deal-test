@@ -10,6 +10,7 @@ require('./bootstrap');
 import Vue from 'vue'
 
 import store from './store'
+import router from "./router"
 
 /**
  * The following block of code may be used to automatically register your
@@ -32,6 +33,7 @@ import Main from "./components/Main.vue";
 
 const app = new Vue({
     store,
+    router,
     components: {
         Main,
     },
