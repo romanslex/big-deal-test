@@ -51,6 +51,7 @@
 
     ul#planet-list
         list-style none
+        height 280px
 
         li
             cursor pointer
