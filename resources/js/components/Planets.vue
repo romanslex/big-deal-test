@@ -1,6 +1,6 @@
 <template lang="pug">
     .container
-        input#search(@keyup.enter="search")
+        input#search(@keyup.enter="search" v-model="s" :disabled="isActionsLocked")
         img#loader(src="../assets/loader.gif" v-show="isLoaderVisible")
         ul#planet-list
             router-link.planet-list-item(v-for="planet in planets" :key="planet.id" tag="li" :to="'/' + planet.id")
@@ -21,13 +21,15 @@
                 lastPage: 1,
                 currentPage: 1,
 
+                s: "",
+
                 isLoaderVisible: false,
-                isPaginationLocked: false
+                isActionsLocked: false
             }
         },
         methods: {
             onPageChanged(page) {
-                if (this.isPaginationLocked)
+                if (this.isActionsLocked)
                     return;
                 if (page === this.currentPage)
                     return;
@@ -35,12 +37,12 @@
                 this.getData(page);
             },
             search() {
-                console.log('get search');
+                console.log(this.s);
             },
             getData(page) {
                 this.planets = [];
                 this.isLoaderVisible = true;
-                this.isPaginationLocked = true;
+                this.isActionsLocked = true;
                 this.$store.dispatch('getPlanets', page)
                     .then(data => {
                         this.isLoaderVisible = false;
@@ -49,7 +51,7 @@
                         this.currentPage = data.current_page;
                         this.planets = data.data;
 
-                        this.isPaginationLocked = false;
+                        this.isActionsLocked = false;
                     })
             },
         },
