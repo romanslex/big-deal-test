@@ -23,7 +23,7 @@ import router from "./router"
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-import Main from "./components/Main.vue";
+import App from "./components/App.vue";
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35,7 +35,7 @@ const app = new Vue({
     store,
     router,
     components: {
-        Main,
+        App,
     },
-    render: h => h(Main)
+    render: h => h(App)
 }).$mount("#app");
