@@ -34,16 +34,19 @@
                 if (page === this.currentPage)
                     return;
 
-                this.getData(page);
+                this.getData(page, this.s);
             },
             search() {
                 console.log(this.s);
             },
-            getData(page) {
+            getData(page, searchStr) {
                 this.planets = [];
                 this.isLoaderVisible = true;
                 this.isActionsLocked = true;
-                this.$store.dispatch('getPlanets', page)
+                this.$store.dispatch('getPlanets', {
+                    page: page,
+                    search: searchStr
+                })
                     .then(data => {
                         this.isLoaderVisible = false;
 
@@ -56,7 +59,7 @@
             },
         },
         created() {
-            this.getData(1)
+            this.getData(1, this.s)
         }
     }
 </script>
