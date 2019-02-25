@@ -1,5 +1,6 @@
 <template lang="pug">
     .container
+        input#search(@keyup.enter="search")
         img#loader(src="../assets/loader.gif" v-show="isLoaderVisible")
         ul#planet-list
             router-link.planet-list-item(v-for="planet in planets" :key="planet.id" tag="li" :to="'/' + planet.id")
@@ -33,6 +34,9 @@
 
                 this.getData(page);
             },
+            search() {
+                console.log('get search');
+            },
             getData(page) {
                 this.planets = [];
                 this.isLoaderVisible = true;
@@ -61,6 +65,11 @@
         margin 0 auto
         text-align center
         position relative
+
+    #search
+        padding 5px 10px
+        font-size 20px
+        font-weight 100
 
     #loader
         width 50px
