@@ -30,6 +30,7 @@
                         this.planet = result;
                         this.isLoaderVisible = false;
                     })
+                    .catch(error => this.$router.push("/"))
             },
             goToList() {
                 this.$router.push('/');

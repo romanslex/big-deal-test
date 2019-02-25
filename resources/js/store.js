@@ -46,7 +46,7 @@ const store = new Vuex.Store({
             });
         },
         getPlanetData({commit, state}, planetId) {
-            return new Promise((resolve) => {
+            return new Promise((resolve, reject) => {
                 if (planetId in state.getPlanetDataCache) {
                     resolve(state.getPlanetDataCache[planetId]);
                     return;
@@ -61,7 +61,7 @@ const store = new Vuex.Store({
                         });
                         resolve(response.data);
                     })
-                    .catch(error => console.log(error));
+                    .catch(error => reject(error));
             })
         }
     }
