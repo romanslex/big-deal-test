@@ -76,6 +76,7 @@
         padding 5px 10px
         font-size 20px
         font-weight 100
+        font-family 'Open Sans'
 
     #loader
         width 50px
