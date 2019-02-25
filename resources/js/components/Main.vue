@@ -4,7 +4,11 @@
             li.planet-list-item(v-for="planet in planets" :key="planet.url")
                 | {{planet.name}}
         ul#pagination
-            li.pagination-item(v-for="n in lastPage" :class="{'current': n === currentPage}") {{n}}
+            li.pagination-item(
+                v-for="n in lastPage" :key="n"
+                :class="{'current': n === currentPage}"
+                @click="getData(n)"
+            ) {{n}}
 </template>
 
 <script>
@@ -14,6 +18,14 @@
                 planets: [],
                 lastPage: 1,
                 currentPage: 1,
+            }
+        },
+        methods: {
+            getData(page){
+                if(page === this.currentPage)
+                    return;
+
+                console.log(page);
             }
         },
         mounted() {
