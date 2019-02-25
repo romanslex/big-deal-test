@@ -1,5 +1,6 @@
 <template lang="pug">
     .container
+        img#loader(src="../assets/loader.gif")
         ul#planet-list
             li.planet-list-item(v-for="planet in planets" :key="planet.url")
                 | {{planet.name}}
@@ -48,6 +49,9 @@
         width max-content
         margin 0 auto
         text-align center
+
+    #loader
+        width 50px
 
     ul#planet-list
         list-style none
