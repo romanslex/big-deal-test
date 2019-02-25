@@ -2,7 +2,7 @@
     .container
         img#loader(src="../assets/loader.gif" v-show="isLoaderVisible")
         ul#planet-list
-            router-link.planet-list-item(v-for="planet in planets" :key="getPlanetId(planet)" tag="li" :to="'/' + getPlanetId(planet)")
+            router-link.planet-list-item(v-for="planet in planets" :key="planet.id" tag="li" :to="'/' + planet.id")
                 | {{planet.name}}
         ul#pagination
             li.pagination-item(
@@ -25,10 +25,10 @@
             }
         },
         methods: {
-            onPageChanged(page){
-                if(this.isPaginationLocked)
+            onPageChanged(page) {
+                if (this.isPaginationLocked)
                     return;
-                if(page === this.currentPage)
+                if (page === this.currentPage)
                     return;
 
                 this.getData(page);
@@ -48,11 +48,8 @@
                         this.isPaginationLocked = false;
                     })
             },
-            getPlanetId(planet){
-                return (planet.url.match(/https:\/\/swapi\.co\/api\/planets\/([1-90]*)\//))[1]
-            }
         },
-        created(){
+        created() {
             this.getData(1)
         }
     }
