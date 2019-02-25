@@ -36,7 +36,7 @@ class SwapiPlanetRepositoryTest extends TestCase
         $service = new SwapiPlanetRepository($client);
 
         // act
-        $result = $service->get($currentPage);
+        $result = $service->get($currentPage, '');
 
         // assert
         self::assertEquals($expected, $result);
@@ -56,6 +56,6 @@ class SwapiPlanetRepositoryTest extends TestCase
         $service = new SwapiPlanetRepository($client);
 
         // act
-        $service->get(1);
+        $service->get(1, '');
     }
 }
