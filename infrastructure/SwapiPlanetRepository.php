@@ -37,13 +37,17 @@ class SwapiPlanetRepository implements PlanetRepositoryInterface
 
     public function getPlanet($planetId): Planet
     {
-        $response = $this->client->get('planets/' . $planetId);
-        $responseBody = json_decode($response->getBody());
-        return new Planet(
-            $this->getPlanetId($responseBody->url),
-            $responseBody->name,
-            $responseBody->url
-        );
+        try {
+            $response = $this->client->get('planets/' . $planetId);
+            $responseBody = json_decode($response->getBody());
+            return new Planet(
+                $this->getPlanetId($responseBody->url),
+                $responseBody->name,
+                $responseBody->url
+            );
+        } catch (\Exception $e) {
+            abort(404);
+        }
     }
 
     private function getPlanetId($url)

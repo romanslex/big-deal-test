@@ -10,6 +10,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Infrastructure\SwapiPlanetRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -80,5 +81,22 @@ class SwapiPlanetRepositoryTest extends TestCase
 
         // assert
         self::assertEquals($planet, $result);
+    }
+
+    /** @test */
+    public function getPlanet_404()
+    {
+        $this->expectException(NotFoundHttpException::class);
+
+        // arrange
+        $mock = new MockHandler([
+            new Response(404),
+        ]);
+        $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);
+        $service = new SwapiPlanetRepository($client);
+
+        // act
+        $service->getPlanet(1);
     }
 }
