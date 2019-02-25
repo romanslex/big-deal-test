@@ -67,6 +67,9 @@
         position absolute
         top 110px
 
+    ul
+        padding 0
+
     ul#planet-list
         list-style none
         height 280px
