@@ -2,6 +2,7 @@
     .container
         input#search(@keyup.enter="search" v-model="s" :disabled="isActionsLocked")
         img#loader(src="../assets/loader.gif" v-show="isLoaderVisible")
+        #not-found(v-show="!isLoaderVisible && planets.length === 0") Нет таких планет
         ul#planet-list
             router-link.planet-list-item(v-for="planet in planets" :key="planet.id" tag="li" :to="'/' + planet.id")
                 | {{planet.name}}
