@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', 'SpaController@index');
-
 Route::get('/data/planets', 'PlanetController@index');
+
+Route::get('{any}', 'SpaController@index')->where('any', '.*');
