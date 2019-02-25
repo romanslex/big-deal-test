@@ -22,4 +22,9 @@ class PlanetController extends Controller
         $page = $request->get('page') ?? 1;
         return $this->planetRepository->get($page);
     }
+
+    public function getPlanetData($id)
+    {
+        return [];
+    }
 }

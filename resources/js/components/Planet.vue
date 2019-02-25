@@ -12,7 +12,7 @@
         methods: {
             getData(){
                 this.$store.dispatch('getPlanetData', this.planetId)
-                    .then(result => console.log())
+                    .then(result => console.log(result))
             }
         },
         created(){
