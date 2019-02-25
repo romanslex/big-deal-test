@@ -2,7 +2,7 @@
     .container
         img#loader(src="../assets/loader.gif" v-show="isLoaderVisible")
         ul#planet-list
-            li.planet-list-item(v-for="planet in planets" :key="planet.url")
+            router-link.planet-list-item(v-for="planet in planets" :key="planet.name" tag="li" :to="'/' + planet.name")
                 | {{planet.name}}
         ul#pagination
             li.pagination-item(
