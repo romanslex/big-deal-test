@@ -33,6 +33,16 @@ const store = new Vuex.Store({
                     })
                     .catch(error => console.log(error));
             });
+        },
+        getPlanetData({commit, state}, planetId){
+            return new Promise((resolve) => {
+                axios
+                    .get('/data/planets/' + planetId)
+                    .then(response => {
+                        resolve(response.data);
+                    })
+                    .catch(error => console.log(error));
+            })
         }
     }
 });
