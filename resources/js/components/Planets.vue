@@ -6,7 +6,7 @@
         ul#planet-list
             router-link.planet-list-item(v-for="planet in planets" :key="planet.id" tag="li" :to="'/' + planet.id")
                 | {{planet.name}}
-        ul#pagination
+        ul#pagination(v-show="lastPage > 1")
             li.pagination-item(
             v-for="n in lastPage" :key="n"
             :class="{'current': n === currentPage}"
