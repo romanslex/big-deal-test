@@ -94,6 +94,8 @@
 
         li
             cursor pointer
+            color #3497dc
+            text-decoration underline
 
     ul#pagination
         display flex
