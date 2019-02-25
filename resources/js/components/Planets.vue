@@ -1,6 +1,12 @@
 <template lang="pug">
     .container
-        input#search(@keyup.enter="search" v-model="s" :disabled="isActionsLocked" placeholder="Поиск (enter)")
+        input#search(
+            @keyup.enter="search"
+            @keyup.esc="s = ''"
+            v-model="s"
+            :disabled="isActionsLocked"
+            placeholder="Поиск (enter)"
+        )
         img#loader(src="../assets/loader.gif" v-show="isLoaderVisible")
         #not-found(v-show="!isLoaderVisible && planets.length === 0") Нет таких планет
         ul#planet-list
@@ -8,9 +14,9 @@
                 | {{planet.name}}
         ul#pagination(v-show="lastPage > 1")
             li.pagination-item(
-            v-for="n in lastPage" :key="n"
-            :class="{'current': n === currentPage}"
-            @click="onPageChanged(n)"
+                v-for="n in lastPage" :key="n"
+                :class="{'current': n === currentPage}"
+                @click="onPageChanged(n)"
             ) {{n}}
 </template>
 
