@@ -37,7 +37,7 @@
                 this.getData(page, this.s);
             },
             search() {
-                console.log(this.s);
+                this.getData(1, this.s);
             },
             getData(page, searchStr) {
                 this.planets = [];

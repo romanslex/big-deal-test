@@ -20,7 +20,7 @@ const store = new Vuex.Store({
         getPlanets({commit, state}, payload) {
             return new Promise((resolve) => {
                 if ((payload.page + payload.search) in state.getPlanetsCache) {
-                    resolve(state.getPlanetsCache[payload.page]);
+                    resolve(state.getPlanetsCache[payload.page + payload.search]);
                     return;
                 }
 
