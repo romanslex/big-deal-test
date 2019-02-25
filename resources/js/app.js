@@ -9,8 +9,7 @@ require('./bootstrap');
 
 import Vue from 'vue'
 
-import Vuex from 'vuex'
-Vue.use(Vuex);
+import store from './store'
 
 /**
  * The following block of code may be used to automatically register your
@@ -32,6 +31,7 @@ import Main from "./components/Main.vue";
  */
 
 const app = new Vue({
+    store,
     components: {
         Main,
     },
