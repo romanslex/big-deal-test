@@ -23,10 +23,18 @@ class SwapiPlanetRepository implements PlanetRepositoryInterface
         $responseBody = json_decode($response->getBody());
 
         $planets = [];
-        foreach($responseBody->results as $planet)
+        foreach ($responseBody->results as $planet) {
             $planets[] = new Planet($planet->name, $planet->url);
+        }
 
         $result = new LengthAwarePaginator($planets, $responseBody->count, 10, $page);
         return $result;
+    }
+
+    public function getPlanet($planetId): Planet
+    {
+        $response = $this->client->get('planets/' . $planetId);
+        $responseBody = json_decode($response->getBody());
+        return new Planet($responseBody->name, $responseBody->url);
     }
 }
