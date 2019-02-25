@@ -66,6 +66,7 @@
         width 50px
         position absolute
         top 110px
+        transform translate(-50%)
 
     ul
         padding 0
