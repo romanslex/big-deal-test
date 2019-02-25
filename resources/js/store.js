@@ -33,6 +33,10 @@ const store = new Vuex.Store({
                             key: page,
                             value: response.data
                         });
+                        response.data.data.map(i => commit('setGetPlanetDataResultToCache', {
+                            key: i.id,
+                            value: i
+                        }));
                         resolve(response.data);
                     })
                     .catch(error => console.log(error));
