@@ -32,8 +32,9 @@
 
 <style scoped lang="stylus">
     .container
-        width 400px
+        width max-content
         margin 0 auto
+        text-align center
 
     ul#planet-list
         list-style none
@@ -41,6 +42,7 @@
             cursor pointer
     ul#pagination
         display flex
+        justify-content center
         list-style none
         li
             display grid
