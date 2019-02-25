@@ -1,6 +1,6 @@
 <template lang="pug">
     .container
-        img#loader(src="../assets/loader.gif")
+        img#loader(src="../assets/loader.gif" v-show="isLoaderVisible")
         ul#planet-list
             li.planet-list-item(v-for="planet in planets" :key="planet.url")
                 | {{planet.name}}
@@ -19,6 +19,8 @@
                 planets: [],
                 lastPage: 1,
                 currentPage: 1,
+
+                isLoaderVisible: false
             }
         },
         methods: {
@@ -29,9 +31,12 @@
                 this.getData(page);
             },
             getData(page) {
+                this.planets = [];
+                this.isLoaderVisible = true;
                 this.$store.dispatch('getPlanets', page)
                     .then(data => {
                         console.log(data);
+                        this.isLoaderVisible = false;
                         this.lastPage = data.last_page;
                         this.currentPage = data.current_page;
                         this.planets = data.data;
@@ -49,9 +54,12 @@
         width max-content
         margin 0 auto
         text-align center
+        position relative
 
     #loader
         width 50px
+        position absolute
+        top 110px
 
     ul#planet-list
         list-style none
