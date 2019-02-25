@@ -58,4 +58,27 @@ class SwapiPlanetRepositoryTest extends TestCase
         // act
         $service->get(1, '');
     }
+
+    /** @test */
+    public function getPlanet_200()
+    {
+        // arrange
+        $planet = new Planet(1, 'testName', 'https://swapi.co/api/planets/1/');
+
+        $mock = new MockHandler([
+            new Response(200, [], json_encode([
+                'name' => 'testName',
+                'url' => 'https://swapi.co/api/planets/1/'
+            ])),
+        ]);
+        $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);
+        $service = new SwapiPlanetRepository($client);
+
+        // act
+        $result = $service->getPlanet(1);
+
+        // assert
+        self::assertEquals($planet, $result);
+    }
 }
