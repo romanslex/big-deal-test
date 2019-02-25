@@ -17,7 +17,7 @@ import router from "./router"
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".
  *
- * Eg. ./components/Main.vue -> <example-component></example-component>
+ * Eg. ./components/Planets.vue -> <example-component></example-component>
  */
 
 // const files = require.context('./', true, /\.vue$/i)
