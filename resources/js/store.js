@@ -5,17 +5,30 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        planetsCache: []
+        planetsCache: {}
+    },
+    mutations: {
+        setGetPlanetsResultToCache(state, payload){
+            state.planetsCache[payload.key] = payload.value
+        }
     },
     actions: {
-        getPlanets({commit}, page) {
+        getPlanets({commit, state}, page) {
             return new Promise((resolve) => {
+                if(page in state.planetsCache){
+                    resolve(state.planetsCache[page]);
+                    return;
+                }
+
                 axios
                     .get('/data/planets', {
                         params: {page: page}
                     })
                     .then(response => {
-                        console.log('from store');
+                        commit('setGetPlanetsResultToCache', {
+                            key: page,
+                            value: response.data
+                        });
                         resolve(response.data);
                     })
                     .catch(error => console.log(error));
