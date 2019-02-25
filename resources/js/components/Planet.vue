@@ -1,21 +1,31 @@
 <template lang="pug">
-    div Planet # {{planetId}} page
+    div
+        h1 Planet # {{planetId}} page
+        #info-block
+            div Название: {{planet.name}}
+            div url: {{planet.url}}
+
 </template>
 
 <script>
     export default {
-        computed: {
-            planetId(){
-                return this.$route.params.id;
+        data() {
+            return {
+                planet: {}
             }
+        },
+        computed: {
+            planetId() {
+                return this.$route.params.id;
+            },
         },
         methods: {
-            getData(){
+            getData() {
                 this.$store.dispatch('getPlanetData', this.planetId)
-                    .then(result => console.log(result))
+                    .then(result => this.planet = result)
             }
         },
-        created(){
+        created() {
             this.getData();
         }
     }
