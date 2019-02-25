@@ -1,6 +1,6 @@
 <template lang="pug">
     .container
-        input#search(@keyup.enter="search" v-model="s" :disabled="isActionsLocked")
+        input#search(@keyup.enter="search" v-model="s" :disabled="isActionsLocked" placeholder="Поиск (enter)")
         img#loader(src="../assets/loader.gif" v-show="isLoaderVisible")
         #not-found(v-show="!isLoaderVisible && planets.length === 0") Нет таких планет
         ul#planet-list
