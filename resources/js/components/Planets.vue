@@ -74,7 +74,8 @@
     #loader
         width 50px
         position absolute
-        top 110px
+        top 173px
+        left 50%
         transform translate(-50%)
 
     ul
