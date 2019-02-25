@@ -20,11 +20,14 @@
                 lastPage: 1,
                 currentPage: 1,
 
-                isLoaderVisible: false
+                isLoaderVisible: false,
+                isPaginationLocked: false
             }
         },
         methods: {
             onPageChanged(page){
+                if(this.isPaginationLocked)
+                    return;
                 if(page === this.currentPage)
                     return;
 
@@ -33,13 +36,16 @@
             getData(page) {
                 this.planets = [];
                 this.isLoaderVisible = true;
+                this.isPaginationLocked = true;
                 this.$store.dispatch('getPlanets', page)
                     .then(data => {
-                        console.log(data);
                         this.isLoaderVisible = false;
+
                         this.lastPage = data.last_page;
                         this.currentPage = data.current_page;
                         this.planets = data.data;
+
+                        this.isPaginationLocked = false;
                     })
             }
         },
