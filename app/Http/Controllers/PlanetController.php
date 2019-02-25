@@ -17,8 +17,14 @@ class PlanetController extends Controller
         $this->planetRepository = $planetRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->planetRepository->get(1);
+        $page = $request->get('page') ?? 1;
+        return $this->planetRepository->get($page);
+    }
+
+    public function getPlanetData($id)
+    {
+        return (array)$this->planetRepository->getPlanet($id);
     }
 }
