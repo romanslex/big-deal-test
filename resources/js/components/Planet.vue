@@ -1,5 +1,5 @@
 <template lang="pug">
-    div
+    div#planet-page
         h1 Planet # {{planetId}} page
         img#loader(src="../assets/loader.gif" v-show="isLoaderVisible")
         #info-block
@@ -38,9 +38,13 @@
 </script>
 
 <style scoped lang="stylus">
+    #planet-page
+        position relative
+        margin 0 auto
+        width max-content
+
     #loader
         width 50px
         position absolute
-        top 110px
         left 135px
 </style>
