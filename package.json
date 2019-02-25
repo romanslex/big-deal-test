@@ -8,6 +8,7 @@
     "devDependencies": {
         "axios": "^0.18",
         "css-loader": "^2.1.0",
+        "file-loader": "^3.0.1",
         "gulp": "^4.0.0",
         "lodash": "^4.17.5",
         "mini-css-extract-plugin": "^0.5.0",

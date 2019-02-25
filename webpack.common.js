@@ -29,6 +29,16 @@ module.exports = {
                 test: /\.pug$/,
                 loader: 'pug-plain-loader'
             },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: "[sha512:hash:base64:7].[ext]",
+                        outputPath: "/img/",
+                    }
+                }]
+            },
         ]
     },
     plugins: [

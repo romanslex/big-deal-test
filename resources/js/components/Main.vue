@@ -1,5 +1,6 @@
 <template lang="pug">
     .container
+        img#loader(src="../assets/loader.gif" v-show="isLoaderVisible")
         ul#planet-list
             li.planet-list-item(v-for="planet in planets" :key="planet.url")
                 | {{planet.name}}
@@ -18,22 +19,33 @@
                 planets: [],
                 lastPage: 1,
                 currentPage: 1,
+
+                isLoaderVisible: false,
+                isPaginationLocked: false
             }
         },
         methods: {
             onPageChanged(page){
+                if(this.isPaginationLocked)
+                    return;
                 if(page === this.currentPage)
                     return;
 
                 this.getData(page);
             },
             getData(page) {
+                this.planets = [];
+                this.isLoaderVisible = true;
+                this.isPaginationLocked = true;
                 this.$store.dispatch('getPlanets', page)
                     .then(data => {
-                        console.log(data);
+                        this.isLoaderVisible = false;
+
                         this.lastPage = data.last_page;
                         this.currentPage = data.current_page;
                         this.planets = data.data;
+
+                        this.isPaginationLocked = false;
                     })
             }
         },
@@ -48,9 +60,16 @@
         width max-content
         margin 0 auto
         text-align center
+        position relative
+
+    #loader
+        width 50px
+        position absolute
+        top 110px
 
     ul#planet-list
         list-style none
+        height 280px
 
         li
             cursor pointer
