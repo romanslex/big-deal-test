@@ -5,6 +5,7 @@
         #info-block
             div Название: {{planet.name}}
             div url: {{planet.url}}
+        button(@click="goToList") Назад к списку
 
 </template>
 
@@ -29,6 +30,9 @@
                         this.planet = result;
                         this.isLoaderVisible = false;
                     })
+            },
+            goToList() {
+                this.$router.push('/');
             }
         },
         created() {
@@ -47,4 +51,14 @@
         width 50px
         position absolute
         left 135px
+
+    button
+        border none
+        background #3d8aec
+        padding 10px
+        font-size 12px
+        text-transform uppercase
+        color: white
+        margin-top 20px
+        cursor pointer
 </style>
