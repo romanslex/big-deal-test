@@ -25,6 +25,6 @@ class PlanetController extends Controller
 
     public function getPlanetData($id)
     {
-        return [];
+        return (array)$this->planetRepository->getPlanet($id);
     }
 }
