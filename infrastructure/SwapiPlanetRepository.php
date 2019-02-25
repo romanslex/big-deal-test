@@ -17,9 +17,9 @@ class SwapiPlanetRepository implements PlanetRepositoryInterface
         $this->client = $client;
     }
 
-    public function get($page): LengthAwarePaginator
+    public function get($page, $search): LengthAwarePaginator
     {
-        $response = $this->client->get('planets', ['query' => ['page' => $page]]);
+        $response = $this->client->get('planets', ['query' => ['page' => $page, 'search' => $search]]);
         $responseBody = json_decode($response->getBody());
 
         $planets = [];
