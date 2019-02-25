@@ -29,16 +29,13 @@
             }
         },
         mounted() {
-            console.log(this.$store.state.test)
-            // axios
-            //     .get('/data/planets')
-            //     .then(response => {
-            //         console.log(response.data);
-            //         this.lastPage = response.data.last_page;
-            //         this.currentPage = response.data.current_page;
-            //         this.planets = response.data.data;
-            //     })
-            //     .catch(error => console.log(error));
+            this.$store.dispatch('getPlanets', 1)
+                .then(data => {
+                    console.log(data);
+                    this.lastPage = data.last_page;
+                    this.currentPage = data.current_page;
+                    this.planets = data.data;
+                })
         }
     }
 </script>
