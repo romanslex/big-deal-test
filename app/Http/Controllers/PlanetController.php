@@ -20,7 +20,8 @@ class PlanetController extends Controller
     public function index(Request $request)
     {
         $page = $request->get('page') ?? 1;
-        return $this->planetRepository->get($page);
+        $search = $request->get('search') ?? '';
+        return $this->planetRepository->get($page, $search);
     }
 
     public function getPlanetData($id)

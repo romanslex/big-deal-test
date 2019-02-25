@@ -1,11 +1,12 @@
 <template lang="pug">
     .container
-        input#search(@keyup.enter="search")
+        input#search(@keyup.enter="search" v-model="s" :disabled="isActionsLocked")
         img#loader(src="../assets/loader.gif" v-show="isLoaderVisible")
+        #not-found(v-show="!isLoaderVisible && planets.length === 0") Нет таких планет
         ul#planet-list
             router-link.planet-list-item(v-for="planet in planets" :key="planet.id" tag="li" :to="'/' + planet.id")
                 | {{planet.name}}
-        ul#pagination
+        ul#pagination(v-show="lastPage > 1")
             li.pagination-item(
             v-for="n in lastPage" :key="n"
             :class="{'current': n === currentPage}"
@@ -21,27 +22,32 @@
                 lastPage: 1,
                 currentPage: 1,
 
+                s: "",
+
                 isLoaderVisible: false,
-                isPaginationLocked: false
+                isActionsLocked: false
             }
         },
         methods: {
             onPageChanged(page) {
-                if (this.isPaginationLocked)
+                if (this.isActionsLocked)
                     return;
                 if (page === this.currentPage)
                     return;
 
-                this.getData(page);
+                this.getData(page, this.s);
             },
             search() {
-                console.log('get search');
+                this.getData(1, this.s);
             },
-            getData(page) {
+            getData(page, searchStr) {
                 this.planets = [];
                 this.isLoaderVisible = true;
-                this.isPaginationLocked = true;
-                this.$store.dispatch('getPlanets', page)
+                this.isActionsLocked = true;
+                this.$store.dispatch('getPlanets', {
+                    page: page,
+                    search: searchStr
+                })
                     .then(data => {
                         this.isLoaderVisible = false;
 
@@ -49,12 +55,12 @@
                         this.currentPage = data.current_page;
                         this.planets = data.data;
 
-                        this.isPaginationLocked = false;
+                        this.isActionsLocked = false;
                     })
             },
         },
         created() {
-            this.getData(1)
+            this.getData(1, this.s)
         }
     }
 </script>
@@ -74,7 +80,8 @@
     #loader
         width 50px
         position absolute
-        top 110px
+        top 173px
+        left 50%
         transform translate(-50%)
 
     ul

@@ -17,20 +17,23 @@ const store = new Vuex.Store({
         }
     },
     actions: {
-        getPlanets({commit, state}, page) {
+        getPlanets({commit, state}, payload) {
             return new Promise((resolve) => {
-                if (page in state.getPlanetsCache) {
-                    resolve(state.getPlanetsCache[page]);
+                if ((payload.page + payload.search) in state.getPlanetsCache) {
+                    resolve(state.getPlanetsCache[payload.page + payload.search]);
                     return;
                 }
 
                 axios
                     .get('/data/planets', {
-                        params: {page: page}
+                        params: {
+                            page: payload.page,
+                            search: payload.search
+                        }
                     })
                     .then(response => {
                         commit('setGetPlanetsResultToCache', {
-                            key: page,
+                            key: payload.page + payload.search,
                             value: response.data
                         });
                         response.data.data.map(i => commit('setGetPlanetDataResultToCache', {
